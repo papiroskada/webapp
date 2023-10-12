@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>День тижня</title>
+    <meta charset="utf-8">
+</head>
+<body>
+<label for="birthdate">Виберіть дату народження:</label>
+<input type="date" id="birthdate" onchange="calculateDayOfWeek()">
+<br>
+<p>День тижня народження: <span id="dayOfWeek"></span></p>
+
+<script>
+    function calculateDayOfWeek() {
+        const birthdateInput = document.getElementById('birthdate');
+        const dayOfWeekSpan = document.getElementById('dayOfWeek');
+
+        const birthdate = new Date(birthdateInput.value);
+        const year = birthdate.getUTCFullYear();
+        const month = birthdate.getUTCMonth() + 1;
+        const day = birthdate.getUTCDate();
+
+        let a = Math.floor((14 - month) / 12);
+        let y = year - a;
+        let m = month + 12 * a - 2;
+        let dayOfWeek = (day + y + Math.floor(y / 4) - Math.floor(y / 100) + Math.floor(y / 400) + Math.floor((31 * m) / 12)) % 7;
+
+        const daysOfWeek = ['Неділя', 'Понеділок', 'Вівторок', 'Середа', 'Четвер', 'П`ятниця', 'Субота'];
+        dayOfWeekSpan.textContent = daysOfWeek[dayOfWeek];
+    }
+</script>
+</body>
+</html>
