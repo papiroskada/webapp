@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Транслітерація</title>
+</head>
+<body>
+    <label for="ukrainianText">Український текст:</label>
+    <input type="text" id="ukrainianText">
+    <br>
+    <label for="transliteratedText">Транслітерований текст:</label>
+    <input type="text" id="transliteratedText" readonly>
+    
+    <script>
+        // Функція для транслітерації тексту
+        function transliterateText() {
+            const ukrainianText = document.getElementById("ukrainianText").value;
+            const transliterationMap = {
+                'а': 'a', 'б': 'b', 'в': 'v', 'г': 'h', 'ґ': 'g', 'д': 'd', 'е': 'e',
+                'є': 'ye', 'ж': 'zh', 'з': 'z', 'и': 'y', 'і': 'i', 'ї': 'yi', 'й': 'y',
+                'к': 'k', 'л': 'l', 'м': 'm', 'н': 'n', 'о': 'o', 'п': 'p', 'р': 'r',
+                'с': 's', 'т': 't', 'у': 'u', 'ф': 'f', 'х': 'kh', 'ц': 'ts', 'ч': 'ch',
+                'ш': 'sh', 'щ': 'shch', 'ь': '', 'ю': 'yu', 'я': 'ya'
+            };
+
+            let transliteratedText = '';
+            for (const char of ukrainianText) {
+                const transliteratedChar = transliterationMap[char.toLowerCase()] || char;
+                if (char === char.toUpperCase()) {
+                    // Зберегти регістр символу
+                    transliteratedText += transliteratedChar.toUpperCase();
+                } else {
+                    transliteratedText += transliteratedChar;
+                }
+            }
+
+            document.getElementById("transliteratedText").value = transliteratedText;
+        }
+
+        // Додати обробник події input для виклику функції при зміні вмісту поля
+        document.getElementById("ukrainianText").addEventListener("input", transliterateText);
+    </script>
+</body>
+</html>
