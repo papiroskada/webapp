@@ -1,42 +1,73 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title>Обчислення прямокутника</title>
-</head>
-<body>
-    <label for="length">Довжина:</label>
-    <input type="number" id="length" oninput="calculateRectangle()">
-    <br>
-    <label for="width">Ширина:</label>
-    <input type="number" id="width" oninput="calculateRectangle()">
-    <br>
-    <p>Периметр: <span id="perimeter">0</span></p>
-    <p>Площа: <span id="area">0</span></p>
-    <p>Довжина діагоналі: <span id="diagonal">0</span></p>
+    <style>
+      p {
+        margin: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <table>
+      <tr>
+        <td>
+          <label for="length">Довжина</label>
+        </td>
+        <td>
+          <input type="number" id="length" oninput="calculateRectangle()" />
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <label for="width">Ширина</label>
+        </td>
+        <td>
+          <input type="number" id="width" oninput="calculateRectangle()" />
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <p>Периметр</p>
+        </td>
+        <td>
+          <p id="perimeter">0</p>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <p>Площа</p>
+        </td>
+        <td>
+          <p id="area">0</p>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <p>Довжина діагоналі</p>
+        </td>
+        <td>
+          <p id="diagonal">0</p>
+        </td>
+      </tr>
+    </table>
 
     <script>
-        function calculateRectangle() {
-            // Отримати значення довжини та ширини з текстових полів
-            var length = parseFloat(document.getElementById("length").value);
-            var width = parseFloat(document.getElementById("width").value);
-
-            // Перевірити на валідацію
-            if (isNaN(length) || isNaN(width) || length <= 0 || width <= 0) {
-                alert("Введіть коректні значення для довжини та ширини.");
-                return;
-            }
-
-            // Обчислити периметр, площу та довжину діагоналі
-            var perimeter = 2 * (length + width);
-            var area = length * width;
-            var diagonal = Math.sqrt(Math.pow(length, 2) + Math.pow(width, 2));
-
-            // Вивести результати на веб-сторінку
-            document.getElementById("perimeter").textContent = perimeter;
-            document.getElementById("area").textContent = area;
-            document.getElementById("diagonal").textContent = diagonal;
+      function calculateRectangle() {
+        var length = parseFloat(document.getElementById("length").value);
+        var width = parseFloat(document.getElementById("width").value);
+        if (isNaN(length) || isNaN(width) || length <= 0 || width <= 0) {
+          alert("Введіть коректні значення для довжини та ширини.");
+          return;
         }
+        var perimeter = 2 * (length + width);
+        var area = length * width;
+        var diagonal = Math.sqrt(Math.pow(length, 2) + Math.pow(width, 2));
+        document.getElementById("perimeter").textContent = perimeter;
+        document.getElementById("area").textContent = area;
+        document.getElementById("diagonal").textContent = diagonal;
+      }
     </script>
-</body>
+  </body>
 </html>

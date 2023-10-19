@@ -1,44 +1,97 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset="UTF-8">
+  <head>
     <title>Транслітерація</title>
-</head>
-<body>
-    <label for="ukrainianText">Український текст:</label>
-    <input type="text" id="ukrainianText">
-    <br>
-    <label for="transliteratedText">Транслітерований текст:</label>
-    <input type="text" id="transliteratedText" readonly>
-    
+  </head>
+  <body>
+    <textarea id="ukrainianText" rows="5" cols="40"></textarea>
+    <br />
+    <textarea id="transliteratedText" rows="5" cols="40" readonly></textarea>
+
     <script>
-        // Функція для транслітерації тексту
-        function transliterateText() {
-            const ukrainianText = document.getElementById("ukrainianText").value;
-            const transliterationMap = {
-                'а': 'a', 'б': 'b', 'в': 'v', 'г': 'h', 'ґ': 'g', 'д': 'd', 'е': 'e',
-                'є': 'ye', 'ж': 'zh', 'з': 'z', 'и': 'y', 'і': 'i', 'ї': 'yi', 'й': 'y',
-                'к': 'k', 'л': 'l', 'м': 'm', 'н': 'n', 'о': 'o', 'п': 'p', 'р': 'r',
-                'с': 's', 'т': 't', 'у': 'u', 'ф': 'f', 'х': 'kh', 'ц': 'ts', 'ч': 'ch',
-                'ш': 'sh', 'щ': 'shch', 'ь': '', 'ю': 'yu', 'я': 'ya'
-            };
+      document
+        .getElementById("ukrainianText")
+        .addEventListener("input", function () {
+          const ukrainianText = this.value;
+          const transliteratedText = transliterateUkrainian(ukrainianText);
+          document.getElementById("transliteratedText").value =
+            transliteratedText;
+        });
 
-            let transliteratedText = '';
-            for (const char of ukrainianText) {
-                const transliteratedChar = transliterationMap[char.toLowerCase()] || char;
-                if (char === char.toUpperCase()) {
-                    // Зберегти регістр символу
-                    transliteratedText += transliteratedChar.toUpperCase();
-                } else {
-                    transliteratedText += transliteratedChar;
-                }
-            }
+      function transliterateUkrainian(text) {
+        const ukrainianToLatinMap = {
+          а: "a",
+          б: "b",
+          в: "v",
+          г: "h",
+          д: "d",
+          е: "e",
+          є: "ie",
+          ж: "zh",
+          з: "z",
+          и: "y",
+          і: "i",
+          ї: "yi",
+          й: "i",
+          к: "k",
+          л: "l",
+          м: "m",
+          н: "n",
+          о: "o",
+          п: "p",
+          р: "r",
+          с: "s",
+          т: "t",
+          у: "u",
+          ф: "f",
+          х: "kh",
+          ц: "ts",
+          ч: "ch",
+          ш: "sh",
+          щ: "shch",
+          ь: "",
+          ю: "iu",
+          я: "ia",
+          А: "A",
+          Б: "B",
+          В: "V",
+          Г: "H",
+          Д: "D",
+          Е: "E",
+          Є: "IE",
+          Ж: "ZH",
+          З: "Z",
+          И: "Y",
+          І: "I",
+          Ї: "YI",
+          Й: "I",
+          К: "K",
+          Л: "L",
+          М: "M",
+          Н: "N",
+          О: "O",
+          П: "P",
+          Р: "R",
+          С: "S",
+          Т: "T",
+          У: "U",
+          Ф: "F",
+          Х: "KH",
+          Ц: "TS",
+          Ч: "CH",
+          Ш: "SH",
+          Щ: "SHCH",
+          Ю: "IU",
+          Я: "IA",
+        };
 
-            document.getElementById("transliteratedText").value = transliteratedText;
-        }
-
-        // Додати обробник події input для виклику функції при зміні вмісту поля
-        document.getElementById("ukrainianText").addEventListener("input", transliterateText);
+        return text
+          .split("")
+          .map((char) => {
+            return ukrainianToLatinMap[char] || char;
+          })
+          .join("");
+      }
     </script>
-</body>
+  </body>
 </html>

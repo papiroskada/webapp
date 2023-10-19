@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Chat</title>
+    <link rel="stylesheet" type="text/css" href="style.css" />
+  </head>
+  <body>
+    <div class="content">
+      <div class="col">
+        <p>Повідомлення USER 1</p>
+      <input
+        type="text"
+        id="user1-input"
+        placeholder="Введіть повідомлення"
+      /><br/>
+      <button id="user1-send-button">Надіслати</button></div>
+      
+      <div
+        id="chat-box"
+        class="chat"
+      ></div>
+
+      <div class="col">
+        <p>Повідомлення USER 2</p>
+      <input
+        type="text"
+        id="user2-input"
+        placeholder="Введіть повідомлення"
+      /><br/>
+      <button id="user2-send-button">Надіслати</button>
+    </div>
+    <script>
+      const chatBox = document.getElementById("chat-box");
+      const user1Input = document.getElementById("user1-input");
+      const user1SendButton = document.getElementById("user1-send-button");
+      const user2Input = document.getElementById("user2-input");
+      const user2SendButton = document.getElementById("user2-send-button");
+
+      user1SendButton.addEventListener("click", function () {
+        const message = user1Input.value;
+        if (message.trim() !== "") {
+          const messageElement = document.createElement("div");
+          const userText = document.createElement("div"); 
+          userText.classList.add("user-text"); 
+          userText.textContent = "Антон";
+          messageElement.appendChild(userText);
+          messageElement.appendChild(document.createTextNode(message));
+          messageElement.classList.add("message");
+          messageElement.classList.add("one");
+          chatBox.appendChild(messageElement);
+          user1Input.value = "";
+          chatBox.scrollTop = chatBox.scrollHeight;
+        }
+      });
+
+      user2SendButton.addEventListener("click", function () {
+        const message = user2Input.value;
+        if (message.trim() !== "") {
+          const messageElement = document.createElement("div");
+          const userText = document.createElement("div"); 
+          userText.classList.add("user-text"); 
+          userText.textContent = "Даша";
+          messageElement.appendChild(userText);
+          messageElement.appendChild(document.createTextNode(message));
+          messageElement.classList.add("message");
+          messageElement.classList.add("two");
+          chatBox.appendChild(messageElement);
+          user2Input.value = "";
+          chatBox.scrollTop = chatBox.scrollHeight; 
+        }
+      });
+
+      user1Input.addEventListener("keyup", function (event) {
+        if (event.key === "Enter") {
+          user1SendButton.click();
+        }
+      });
+
+      user2Input.addEventListener("keyup", function (event) {
+        if (event.key === "Enter") {
+          user2SendButton.click();
+        }
+      });
+    </script>
+  </body>
+</html>
